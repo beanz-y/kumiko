@@ -104,9 +104,11 @@ function App() {
                   <optgroup label="Hexagonal (Traditional)">
                     <option value="asanoha_true">True Asanoha</option>
                     <option value="mitsukude">Mitsukude (Triangle Grid)</option>
+                    <option value="kagome">Kagome (Woven Basket)</option>
                   </optgroup>
                   <optgroup label="Square (Modern)">
                     <option value="asanoha_square">Square Asanoha</option>
+                    <option value="yotsume">Yotsume (Four Eyes)</option>
                     <option value="kaku">Kaku (Grid & Cross)</option>
                     <option value="hishi">Hishi (Diamond Crosshatch)</option>
                   </optgroup>
