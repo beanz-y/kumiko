@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import KumikoCanvas from './components/KumikoCanvas';
 
 function App() {
   const [imageSrc, setImageSrc] = useState(null);
@@ -92,23 +93,18 @@ function App() {
             </div>
           </div>
         ) : (
-          /* Preview Section (Temporary placeholder for Phase 2 Canvas) */
-          <div className="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm border border-amber-900/10">
-             <div className="w-full max-w-2xl bg-gray-100 rounded-lg overflow-hidden flex justify-center items-center">
-               <img src={imageSrc} alt="Uploaded preview" className="max-h-[600px] object-contain" />
-             </div>
-             <div className="mt-6 flex gap-4">
+          /* Processing & Output Section */
+          <div className="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm border border-amber-900/10 w-full">
+            
+            {/* The Rendering Engine */}
+            <KumikoCanvas imageSrc={imageSrc} />
+            
+             <div className="mt-8 flex gap-4 w-full justify-center border-t border-gray-100 pt-6">
                 <button 
                   onClick={resetImage}
-                  className="px-4 py-2 text-sm font-semibold text-amber-900 bg-amber-100 rounded-md hover:bg-amber-200 transition-colors"
+                  className="px-6 py-2.5 text-sm font-semibold text-amber-900 bg-amber-50 rounded-md hover:bg-amber-100 transition-colors border border-amber-200"
                 >
-                  Choose Different Image
-                </button>
-                <button 
-                  className="px-4 py-2 text-sm font-semibold text-white bg-amber-800 rounded-md hover:bg-amber-900 transition-colors cursor-not-allowed opacity-50"
-                  disabled
-                >
-                  Generate Pattern (Coming Next)
+                  Upload New Image
                 </button>
              </div>
           </div>
