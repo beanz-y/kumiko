@@ -5,11 +5,13 @@ function App() {
   const [imageSrc, setImageSrc] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
+  const canvasComponentRef = useRef(null);
 
   // --- Phase 3: Control Panel State ---
   const [gridSize, setGridSize] = useState(20);
   const [baseThickness, setBaseThickness] = useState(3.5);
   const [sensitivity, setSensitivity] = useState(1.0);
+  const [activePattern, setActivePattern] = useState('asanoha');
 
   const handleFile = (file) => {
     if (file && file.type.startsWith('image/')) {
@@ -87,6 +89,22 @@ function App() {
             <h2 className="text-xl font-bold text-amber-900 mb-6 border-b border-amber-100 pb-2">Pattern Controls</h2>
             
             <div className="space-y-6">
+              {/* Pattern Selector */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Kumiko Style
+                </label>
+                <select 
+                  value={activePattern}
+                  onChange={(e) => setActivePattern(e.target.value)}
+                  className="w-full rounded-md border border-amber-900/20 bg-white px-3 py-2 text-sm text-gray-900 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                >
+                  <option value="asanoha">Square Asanoha (Classic)</option>
+                  <option value="kaku">Kaku (Grid & Cross)</option>
+                  <option value="hishi">Hishi (Diamond Crosshatch)</option>
+                </select>
+              </div>
+
               {/* Grid Density Slider */}
               <div>
                 <label className="flex justify-between text-sm font-medium text-gray-700 mb-1">
@@ -138,15 +156,33 @@ function App() {
             >
               Upload New Image
             </button>
+            {/* --- NEW EXPORT SECTION --- */}
+            <div className="mt-6 pt-6 border-t border-amber-100 space-y-3">
+              <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Export Art</h3>
+              <button 
+                onClick={() => canvasComponentRef.current?.exportPNG()}
+                className="w-full flex justify-center items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-amber-700 rounded-md hover:bg-amber-800 transition-colors shadow-sm"
+              >
+                Download PNG (Image)
+              </button>
+              <button 
+                onClick={() => canvasComponentRef.current?.exportSVG()}
+                className="w-full flex justify-center items-center gap-2 px-4 py-2 text-sm font-semibold text-amber-800 bg-white border border-amber-300 rounded-md hover:bg-amber-50 transition-colors shadow-sm"
+              >
+                Download SVG (Vector/CNC)
+              </button>
+            </div>
           </aside>
 
           {/* Main Canvas Area */}
           <main className="flex-grow w-full bg-white p-6 rounded-xl shadow-sm border border-amber-900/10 flex justify-center items-center">
-            <KumikoCanvas 
+            <KumikoCanvas
+              ref={canvasComponentRef} 
               imageSrc={imageSrc} 
               gridSize={gridSize}
               baseThickness={baseThickness}
               sensitivity={sensitivity}
+              activePattern={activePattern}
             />
           </main>
         </div>
