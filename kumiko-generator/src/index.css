@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* A subtle wood-themed background for our app */
+body {
+  background-color: #fdfbf7;
+  color: #2c1e16;
+}
