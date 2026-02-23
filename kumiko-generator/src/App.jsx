@@ -11,7 +11,7 @@ function App() {
   const [gridSize, setGridSize] = useState(20);
   const [baseThickness, setBaseThickness] = useState(3.5);
   const [sensitivity, setSensitivity] = useState(1.0);
-  const [activePattern, setActivePattern] = useState('asanoha');
+  const [activePattern, setActivePattern] = useState('asanoha_true');
 
   const handleFile = (file) => {
     if (file && file.type.startsWith('image/')) {
@@ -99,9 +99,15 @@ function App() {
                   onChange={(e) => setActivePattern(e.target.value)}
                   className="w-full rounded-md border border-amber-900/20 bg-white px-3 py-2 text-sm text-gray-900 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
                 >
-                  <option value="asanoha">Square Asanoha (Classic)</option>
-                  <option value="kaku">Kaku (Grid & Cross)</option>
-                  <option value="hishi">Hishi (Diamond Crosshatch)</option>
+                  <optgroup label="Hexagonal (Traditional)">
+                    <option value="asanoha_true">True Asanoha</option>
+                    <option value="mitsukude">Mitsukude (Triangle Grid)</option>
+                  </optgroup>
+                  <optgroup label="Square (Modern)">
+                    <option value="asanoha_square">Square Asanoha</option>
+                    <option value="kaku">Kaku (Grid & Cross)</option>
+                    <option value="hishi">Hishi (Diamond Crosshatch)</option>
+                  </optgroup>
                 </select>
               </div>
 
