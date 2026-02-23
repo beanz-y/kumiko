@@ -6,6 +6,8 @@ function App() {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
   const canvasComponentRef = useRef(null);
+  const [exportRes, setExportRes] = useState(2160);
+  const [useOriginalColors, setUseOriginalColors] = useState(false);
 
   // --- Phase 3: Control Panel State ---
   const [gridSize, setGridSize] = useState(20);
@@ -156,6 +158,23 @@ function App() {
               </div>
             </div>
 
+            {/* Color Mode Toggle */}
+              <div className="pt-4 border-t border-gray-100">
+                <label className="flex items-center justify-between cursor-pointer">
+                  <span className="text-sm font-medium text-gray-700">Use Original Image Colors</span>
+                  <div className="relative">
+                    <input 
+                      type="checkbox" 
+                      className="sr-only" 
+                      checked={useOriginalColors}
+                      onChange={() => setUseOriginalColors(!useOriginalColors)}
+                    />
+                    <div className={`block w-10 h-6 rounded-full transition-colors ${useOriginalColors ? 'bg-amber-700' : 'bg-gray-300'}`}></div>
+                    <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform ${useOriginalColors ? 'transform translate-x-4' : ''}`}></div>
+                  </div>
+                </label>
+              </div>
+
             <button 
               onClick={resetImage}
               className="mt-8 w-full px-4 py-2 text-sm font-semibold text-amber-900 bg-amber-50 rounded-md hover:bg-amber-100 transition-colors border border-amber-200"
@@ -165,17 +184,31 @@ function App() {
             {/* --- NEW EXPORT SECTION --- */}
             <div className="mt-6 pt-6 border-t border-amber-100 space-y-3">
               <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Export Art</h3>
+              
+              <div className="flex gap-2 mb-2">
+                <select 
+                  value={exportRes}
+                  onChange={(e) => setExportRes(Number(e.target.value))}
+                  className="w-full rounded-md border border-amber-900/20 bg-white px-2 py-1.5 text-sm text-gray-900 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                >
+                  <option value={1080}>FHD (1080p)</option>
+                  <option value={1440}>QHD (1440p)</option>
+                  <option value={2160}>4K (2160p)</option>
+                  <option value={4320}>8K (4320p)</option>
+                </select>
+              </div>
+
               <button 
-                onClick={() => canvasComponentRef.current?.exportPNG()}
+                onClick={() => canvasComponentRef.current?.exportPNG(exportRes)}
                 className="w-full flex justify-center items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-amber-700 rounded-md hover:bg-amber-800 transition-colors shadow-sm"
               >
-                Download PNG (Image)
+                Download PNG
               </button>
               <button 
-                onClick={() => canvasComponentRef.current?.exportSVG()}
+                onClick={() => canvasComponentRef.current?.exportSVG(exportRes)}
                 className="w-full flex justify-center items-center gap-2 px-4 py-2 text-sm font-semibold text-amber-800 bg-white border border-amber-300 rounded-md hover:bg-amber-50 transition-colors shadow-sm"
               >
-                Download SVG (Vector/CNC)
+                Download SVG
               </button>
             </div>
           </aside>
@@ -189,6 +222,7 @@ function App() {
               baseThickness={baseThickness}
               sensitivity={sensitivity}
               activePattern={activePattern}
+              useOriginalColors={useOriginalColors}
             />
           </main>
         </div>
