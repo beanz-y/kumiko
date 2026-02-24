@@ -105,9 +105,12 @@ function App() {
                     <option value="asanoha_true">True Asanoha</option>
                     <option value="mitsukude">Mitsukude (Triangle Grid)</option>
                     <option value="kagome">Kagome (Woven Basket)</option>
+                    <option value="kikko">Kikko (Tortoise Shell)</option>
                   </optgroup>
                   <optgroup label="Square (Modern)">
-                    <option value="asanoha_square">Square Asanoha</option>
+                    <option value="asanoha_square">Square Asanoha (Kakuasa)</option>
+                    <option value="shokko">Shokko (Octagon & Square)</option>
+                    <option value="goma">Goma-gara (Sesame)</option>
                     <option value="yotsume">Yotsume (Four Eyes)</option>
                     <option value="kaku">Kaku (Grid & Cross)</option>
                     <option value="hishi">Hishi (Diamond Crosshatch)</option>
